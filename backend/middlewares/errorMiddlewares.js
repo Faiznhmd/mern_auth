@@ -4,11 +4,11 @@ const notFound = (req, res, next) => {
   next(error);
 };
 
-const errorHandler = (err, res, req, next) => {
+const errorHandler = (err, req, res, next) => {
   let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   let message = err.message;
 
-  if (err.name === 'CastError' && err.Kind === 'ObjectId') {
+  if (err.name === 'CastError' && err.kind === 'ObjectId') {
     statusCode = 404;
     message = 'Resource not Found';
   }
