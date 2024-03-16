@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Toast } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { useRegisterMutation } from '../slices/userApislice';
 import { setCredentials } from '../slices/authSlice';
 import { Form, Button, Row, Col } from 'react-bootstrap';
@@ -31,14 +31,14 @@ const RegisterScreen = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      Toast.error('Password do not match');
+      toast.error('Password do not match');
     } else {
       try {
         const res = await register({ name, email, password }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate('/');
       } catch (err) {
-        Toast.error(err?.data?.message || err.error);
+        toast.error(err?.data?.message || err.error);
       }
     }
   };
