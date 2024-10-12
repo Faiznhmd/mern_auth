@@ -3,7 +3,7 @@ import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 
 //login
-const authUser = asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
@@ -55,6 +55,8 @@ const logoutUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: ' User Logged Out' });
 });
 
+//getUserprofile
+
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = {
     _id: req.user._id,
@@ -63,6 +65,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
   };
   res.status(200).json(user);
 });
+
+//updateUserprofile
 
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -87,8 +91,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 });
 
 export {
-  authUser,
   registerUser,
+  loginUser,
   logoutUser,
   getUserProfile,
   updateUserProfile,
